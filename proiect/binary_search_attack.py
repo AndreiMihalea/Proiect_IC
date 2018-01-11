@@ -2,6 +2,15 @@ import os
 import math
 import numpy as np
 from copy import copy
+import shutil
+
+files = [f for f in os.listdir('files')]
+for f in files:
+	if f != 'leaked_files' and f != 'simulated_files':
+		if os.path.isfile('files/' + f):
+			os.remove('files/' + f)
+		else:
+			shutil.rmtree('files/' + f)
 
 server_path = 'files/simulated_files/'
 leaked_path = 'files/leaked_files/'
@@ -68,7 +77,9 @@ def recover(path, K, *token):
 
 	return result
 
-'''
-inject_files('files/', K)
-print (recover('files/', K, 4))
-'''
+def main():
+	inject_files('files/', K)
+	print (recover('files/', K, 4))
+
+if __name__ == "__main__":
+	main()

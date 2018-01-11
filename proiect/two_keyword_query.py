@@ -1,5 +1,13 @@
 from binary_search_attack import *
 
+files = [f for f in os.listdir('files')]
+for f in files:
+	if f != 'leaked_files' and f != 'simulated_files':
+		if os.path.isfile('files/' + f):
+			os.remove('files/' + f)
+		else:
+			shutil.rmtree('files/' + f)
+
 def inject_files_disjoint(path, K1, K2):
 	inject_files(path, K1)
 
@@ -59,5 +67,9 @@ def recover_conjunctive(path, t1, t2, K, K1s, K2s):
 
 	return (k1, k2)
 
-K1s, K2s = inject_files_conjunctive('files/', K)
-print(recover_conjunctive('files/', 6, 5, K, K1s, K2s))
+def main():
+	K1s, K2s = inject_files_conjunctive('files/', K)
+	print(recover_conjunctive('files/', 6, 5, K, K1s, K2s))
+
+if __name__ == "__main__":
+	main()

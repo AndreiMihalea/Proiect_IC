@@ -43,5 +43,9 @@ def recover_hierarchical(path, K, *token):
 
 	return recover(path + 'FF' + str(partition_no) + '/', u, *token)
 
-#inject_files_hierarchical('files/', K)
-#print(recover_hierarchical('files/', K, 7))
+def main():
+	inject_files_hierarchical('files/', K)
+	print(recover_hierarchical('files/', K, 7))
+	
+if __name__ == "__main__":
+	main()

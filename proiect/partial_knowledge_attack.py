@@ -1,6 +1,14 @@
 from binary_search_attack import *
 import random
 
+files = [f for f in os.listdir('files')]
+for f in files:
+	if f != 'leaked_files' and f != 'simulated_files':
+		if os.path.isfile('files/' + f):
+			os.remove('files/' + f)
+		else:
+			shutil.rmtree('files/' + f)
+
 def inject_files_single(path, token, K):
 	all_files = [f for f in os.listdir(path + 'simulated_files/') if os.path.isfile(path + 'simulated_files/' + f)]
 	token_freq = len(server(server_path, token)) / len(all_files)
@@ -38,5 +46,9 @@ def recover_single(path, token, K):
 	else:
 		return recover(path, K, token)
 
-Kprim = inject_files_single('files/', 3, K)
-print(recover_single('files/', 3, Kprim))
+def main():
+	Kprim = inject_files_single('files/', 3, K)
+	print(recover_single('files/', 3, Kprim))
+
+if __name__ == "__main__":
+	main()

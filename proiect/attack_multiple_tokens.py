@@ -2,6 +2,14 @@ from binary_search_attack import *
 from hierarchical_search_attack import *
 import random
 
+files = [f for f in os.listdir('files')]
+for f in files:
+	if f != 'leaked_files' and f != 'simulated_files':
+		if os.path.isfile('files/' + f):
+			os.remove('files/' + f)
+		else:
+			shutil.rmtree('files/' + f)
+
 tokens = [i for i in range(n_keys)]
 
 m = 128
@@ -131,4 +139,8 @@ def attack_multiple_tokens(path, t, K):
 
 	print (keywords)
 
-attack_multiple_tokens('files/', t, K)
+def main():
+	attack_multiple_tokens('files/', t, K)
+
+if __name__ == "__main__":
+	main()

@@ -1,6 +1,14 @@
 from binary_search_attack import *
 from collections import OrderedDict
 
+files = [f for f in os.listdir('files')]
+for f in files:
+	if f != 'leaked_files' and f != 'simulated_files':
+		if os.path.isfile('files/' + f):
+			os.remove('files/' + f)
+		else:
+			shutil.rmtree('files/' + f)
+			
 def attack_conjunctive(path, q, K):
 	k = []
 	d = len(q)
@@ -48,4 +56,8 @@ def attack_conjunctive(path, q, K):
 
 	return k
 
-print(attack_conjunctive('files/', [1, 15], K))
+def main():
+	print(attack_conjunctive('files/', [1, 15], K))
+
+if __name__ == "__main__":
+	main()
